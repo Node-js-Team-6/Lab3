@@ -7,23 +7,21 @@ class Repository{
 
     /*
      * adding item to the collection with specified name - collectionName
-     * returns id of the inserted element; YOU'D BETTER SAVE THAT ID
      */
     create(item, collectionName) {
         const res = this.client.db(this.dbName).collection(collectionName).insertOne(item);
 
         if(this.logger) {
-            this.logger.log(`New object created with the following id: ${res.insertedId}`);
+            this.logger.log(`New object created`);
         }
 
-        return res;
     }
 
     /*
      * updates item in the collection with specified name; matching element happens by id
      */
     update(item, collectionName) {
-        const res = this.client.db(this.dbName).collection(collectionName).updateOne({ _id: item.id }, { $set: item });
+        const res = this.client.db(this.dbName).collection(collectionName).updateOne({ id: item.id }, { $set: item });
 
         if(this.logger) {
             this.logger.log(`${res.matchedCount} object(s) matched the query criteria.`);
@@ -35,7 +33,7 @@ class Repository{
      * deletes item from the collection with specified name; matching element happens by id
      */
     delete(item, collectionName) {
-        const res = this.client.db(this.dbName).collection(collectionName).deleteOne({ _id: item.id });
+        const res = this.client.db(this.dbName).collection(collectionName).deleteOne({ id: item.id });
 
         if(this.logger) {
             this.logger.log(`${res.deletedCount} object(s) was/were deleted.`);
@@ -47,7 +45,7 @@ class Repository{
      * returns found object
      */
     find(id, collectionName) {
-        let res = this.client.db(this.dbName).collection(collectionName).findOne({ _id: itemm.id });
+        let res = this.client.db(this.dbName).collection(collectionName).findOne({ id: itemm.id });
 
         if(this.logger) {
             if (res) {

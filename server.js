@@ -17,7 +17,7 @@ function main() {
         try {
             const repo = new Repository(client, "fileManager", { log(msg) { console.log(msg) } });
 
-            repo.create(new File(3, "hellowoworld3.js", 1, "2b"), "files");
+            repo.create(new File(5, "hellowoworld5.js", 1, "2b"), "files");
 
             http.createServer(function (req, res) {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
