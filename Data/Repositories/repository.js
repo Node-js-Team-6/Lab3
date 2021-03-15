@@ -7,23 +7,21 @@ class Repository{
 
     /*
      * adding item to the collection with specified name - collectionName
-     * returns id of the inserted element; YOU'D BETTER SAVE THAT ID
      */
     create(item, collectionName) {
         const res = this.client.db(this.dbName).collection(collectionName).insertOne(item);
 
         if(this.logger) {
-            this.logger.log(`New object created with the following id: ${res.insertedId}`);
+            this.logger.log(`New object created`);
         }
 
-        return res;
     }
 
     /*
      * updates item in the collection with specified name; matching element happens by id
      */
     update(item, collectionName) {
-        const res = this.client.db(this.dbName).collection(collectionName).updateOne({ _id: item.id }, { $set: item });
+        const res = this.client.db(this.dbName).collection(collectionName).updateOne({ _id: item._id }, { $set: item });
 
         if(this.logger) {
             this.logger.log(`${res.matchedCount} object(s) matched the query criteria.`);
@@ -35,7 +33,7 @@ class Repository{
      * deletes item from the collection with specified name; matching element happens by id
      */
     delete(item, collectionName) {
-        const res = this.client.db(this.dbName).collection(collectionName).deleteOne({ _id: item.id });
+        const res = this.client.db(this.dbName).collection(collectionName).deleteOne({ _id: item._id });
 
         if(this.logger) {
             this.logger.log(`${res.deletedCount} object(s) was/were deleted.`);
@@ -44,20 +42,25 @@ class Repository{
 
     /*
      * finds one item from the collection with specified name; finding element happens by id
-     * returns found object
      */
-    find(id, collectionName) {
-        let res = this.client.db(this.dbName).collection(collectionName).findOne({ _id: itemm.id });
-
-        if(this.logger) {
-            if (res) {
-                this.logger.log(`Found an object in the collection with id: '${id}':`);
-            } else {
-                this.logger.log(`No objects found with id: '${id}'`);
+    find(id, collectionName, callback = function(result) {}) {
+        
+        this.client.db(this.dbName).collection(collectionName).findOne({ _id: id }, (err, result) => {
+            if(err) {
+                this.logger.log(`Error while finding element with id '${id}'`);
+                return;
             }
-        }
-
-        return res;
+            
+            if(this.logger) {
+                if (result) {
+                    this.logger.log(`Found an object in the collection with id: '${id}':`);
+                } else {
+                    this.logger.log(`No objects found with id: '${id}'`);
+                }
+            }
+    
+            callback(result);
+        });
     }
 
     /*
@@ -73,21 +76,24 @@ class Repository{
      *                          consider looking at the following examples:
      *                          { name : 1 } - sorted by name ascending; -1 - descending
      *                          { name : 1, surname : 1 } - sorted by name ascending, then by surname ascending
-     * returns found objects
      */
-    find(collectionName, filterObject = {}, sortObject = {}) {
-        const cursor = this.client.db(this.dbName).collection(collectionName).find(filterObject).sort(sortObject);
-        let res = cursor.toArray();
-
-        if(this.logger) {
-            if (res.length > 0) {
-                this.logger.log(`Found ${res.length} object(s) in the collection':`);
-            } else {
-                this.logger.log(`No objects found`);
+    findMany(collectionName, filterObject = {}, sortObject = {}, callback = function(result) {}) {
+        this.client.db(this.dbName).collection(collectionName).find(filterObject).sort(sortObject).toArray((err, result) => {
+            if(err) {
+                this.logger.log(`Error while finding element with id '${id}'`);
+                return;
             }
-        }
 
-        return res;
+            if(this.logger) {
+                if (result.length > 0) {
+                    this.logger.log(`Found ${result.length} object(s) in the collection':`);
+                } else {
+                    this.logger.log(`No objects found`);
+                }
+            }
+    
+            callback(result);
+        });
     }
 }
 

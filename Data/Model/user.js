@@ -1,6 +1,8 @@
 class User{
     constructor(id, name){
-        this.id = id;
+        this._id = id;
         this.name = name;
     }
 }
+
+exports.User = User;
