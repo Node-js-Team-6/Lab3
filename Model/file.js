@@ -30,3 +30,5 @@ class File{
         return $div_row;
     }
 }
+
+exports.File = File;
