@@ -5,3 +5,4 @@ class Rating{
         this.idFile = idFile;
     }
 }
+
