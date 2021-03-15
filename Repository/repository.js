@@ -9,8 +9,8 @@ class Repository{
      * adding item to the collection with specified name - collectionName
      * returns id of the inserted element; YOU'D BETTER SAVE THAT ID
      */
-    async create(item, collectionName) {
-        const res = await client.db(this.dbName).collection(collectionName).insertOne(item);
+    create(item, collectionName) {
+        const res = this.client.db(this.dbName).collection(collectionName).insertOne(item);
 
         if(this.logger) {
             this.logger.log(`New object created with the following id: ${res.insertedId}`);
@@ -22,8 +22,8 @@ class Repository{
     /*
      * updates item in the collection with specified name; matching element happens by id
      */
-    async update(item, collectionName) {
-        const res = await client.db(this.dbName).collection(collectionName).updateOne({ _id: item.id }, { $set: item });
+    update(item, collectionName) {
+        const res = this.client.db(this.dbName).collection(collectionName).updateOne({ _id: item.id }, { $set: item });
 
         if(this.logger) {
             this.logger.log(`${res.matchedCount} object(s) matched the query criteria.`);
@@ -34,8 +34,8 @@ class Repository{
     /*
      * deletes item from the collection with specified name; matching element happens by id
      */
-    async delete(item, collectionName) {
-        const res = await client.db(this.dbName).collection(collectionName).deleteOne({ _id: item.id });
+    delete(item, collectionName) {
+        const res = this.client.db(this.dbName).collection(collectionName).deleteOne({ _id: item.id });
 
         if(this.logger) {
             this.logger.log(`${res.deletedCount} object(s) was/were deleted.`);
@@ -46,8 +46,8 @@ class Repository{
      * finds one item from the collection with specified name; finding element happens by id
      * returns found object
      */
-    async find(id, collectionName) {
-        let res = await client.db(this.dbName).collection(collectionName).findOne({ _id: itemm.id });
+    find(id, collectionName) {
+        let res = this.client.db(this.dbName).collection(collectionName).findOne({ _id: itemm.id });
 
         if(this.logger) {
             if (res) {
@@ -75,9 +75,9 @@ class Repository{
      *                          { name : 1, surname : 1 } - sorted by name ascending, then by surname ascending
      * returns found objects
      */
-    async find(collectionName, filterObject = {}, sortObject = {}) {
-        const cursor = client.db(this.dbName).collection(collectionName).find(filterObject).sort(sortObject);
-        let res = await cursor.toArray();
+    find(collectionName, filterObject = {}, sortObject = {}) {
+        const cursor = this.client.db(this.dbName).collection(collectionName).find(filterObject).sort(sortObject);
+        let res = cursor.toArray();
 
         if(this.logger) {
             if (res.length > 0) {
@@ -92,33 +92,3 @@ class Repository{
 }
 
 exports.Repository = Repository;
-
-async function createExample() {
-    const { MongoClient } = require("mongodb");
-
-    // Connection URI
-    const uri = "mongodb://localhost:27017";
-    // Create a new MongoClient
-    const client = new MongoClient(uri, { useUnifiedTopology: true });
-
-    try {
-        // Connect the client to the server
-        await client.connect();
-        // Establish and verify connection
-        await client.db("admin").command({ ping: 1 });
-        console.log("Connected successfully to server");
-
-        const repo = new Repository(client, "fileManager", { log(msg) { console.log(msg) } });
-        console.log("wwwwwwwww");
-    }
-    catch(e) {
-        console.log("error");
-        console.log(e);
-    } 
-    finally {
-        // Ensures that the client will close when you finish/error
-        await client.close();
-    }
-}
-
-createExample();
