@@ -4,6 +4,22 @@
  * Copyright 2011-2019 Twitter, Inc.
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
+
+.addFileForm {
+  margin-right: auto;
+  display: none;
+}
+
+.addFolderForm{
+  margin-right: auto;
+  display: none;
+
+}
+
+
+.search{
+  margin-top: 50px;
+}
 :root {
   --blue: #007bff;
   --indigo: #6610f2;
@@ -228,6 +244,10 @@ label {
 
 button {
   border-radius: 0;
+  color: black !important;
+  border-color: darkred !important;
+  background-color: white !important;
+  border-width: medium !important;
 }
 
 button:focus {
@@ -1884,9 +1904,14 @@ pre code {
 .form-control:focus {
   color: #495057;
   background-color: #fff;
+  border-color: red;
+  outline: 0;
+  /*
   border-color: #80bdff;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+
+   */
 }
 
 .form-control::-webkit-input-placeholder {

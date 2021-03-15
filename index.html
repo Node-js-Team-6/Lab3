@@ -9,18 +9,79 @@
     <link rel="stylesheet" href="css/bootstrap.css">
 </head>
 <body>
-<div class="container w-75">
-    <div class='row text-center'>
-        <div class="col">
-            1
+<div class="container w-80">
+
+    <!--    Search  and back        -->
+    <div class='row search text-center'>
+        <div class="col-1">
+            <button type="button" class="btn btn-primary" id="backBtn">Back</button>
         </div>
-        <div class="col">
-            2
+        <div class="col-3">
+            <input type="text" class="form-control" placeholder="File name">
         </div>
-        <div class="col">
-            3
+        <div class="col-3">
+            <input type="text" class="form-control" placeholder="File extension">
+        </div>
+        <div class="col-3">
+            <input type="text" class="form-control" placeholder="Rating">
+        </div>
+        <div class="col-2">
+            <button type="button" class="btn btn-primary" id="searchBtn">Search</button>
         </div>
     </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    <div class ='row p-1'>
+        <div class="col-md-9"></div>
+     <!--   <div class = "col-md-3 btn-outline-warning" id = "addFileBtn" type = "button">Add File</div> -->
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary btn-lg" id="addFileBtn" style="height:50px;width:200px; margin-right: auto">AddFile</button>
+        </div>
+    </div>
+    <br>
+    <br>
+    <!----------ADD FORM------------->
+    <div class = 'container'>
+        <section class="addFileForm">
+    <form id="addFile">
+        <div class="form-group row">
+            <div class="col-md-9"></div>
+            <div class="col-3">
+                <input type="name" class="form-control" id="inputFileName" placeholder="File Name">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-10"></div>
+            <div class="col-md-2">
+                <button type="submit" class="btn btn-primary" id="SubmitFile">Submit</button>
+            </div>
+        </div>
+    </form>
+        </section>
+
+        <section class="addFolderForm">
+            <form id="AddFolder">
+                <div class="form-group row">
+                    <div class="col-md-9"></div>
+                    <div class="col-3">
+                        <input type="name" class="form-control" id="inputFolderName" placeholder="Folder Name">
+                    </div>
+                </div>
+
+                <div class="row">
+                        <div class="col-md-10"></div>
+                        <div class="col-md-2">
+                            <button type="submit" class="btn btn-primary" id="submitFolder">Submit</button>
+                        </div>
+                </div>
+            </form>
+        </section>
+    </div>
+
+
 </div>
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
