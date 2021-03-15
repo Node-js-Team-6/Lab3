@@ -3,8 +3,9 @@ const url = require('url');
 const { MongoClient } = require("mongodb");
 const fs = require('fs');
 
-const { Repository } = require('./Repository/repository');
-const { File } = require('./Model/file');
+const { Repository } = require('./Data/Repositories/repository');
+const { FileRepository } = require('./Data/Repositories/fileRepository');
+const { File } = require('./Data/Model/file');
 
 function main() {
     const mongoClient = new MongoClient("mongodb://localhost:27017", { useUnifiedTopology: true });
@@ -15,7 +16,12 @@ function main() {
         }
 
         try {
-            const repo = new Repository(client, "fileManager", { log(msg) { console.log(msg) } });
+            //const repo = new Repository(client, "fileManager", { log(msg) { console.log(msg) } });
+            //repo.create(new File(1, "helloworld.js", 1, '2b'), "files");
+            //repo.find(1, "files", (result) => console.log(result));
+
+            const fileRepo = new FileRepository(client, "fileManager", { log(msg) { console.log(msg) } });
+            fileRepo.findMany({}, {}, (result) => console.log(result));
 
             http.createServer(function (req, res) {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
