@@ -91,6 +91,8 @@ class Repository{
     }
 }
 
+exports.Repository = Repository;
+
 async function createExample() {
     const { MongoClient } = require("mongodb");
 
