@@ -1,6 +1,6 @@
 class Rating{
-    constructor(id, idUser, idFile, stars, comment) {
-        this._id = id;
+    constructor(idUser, idFile, stars, comment) {
+        this._id = undefined;
         this.idUser = idUser;
         this.idFile = idFile;
         this.stars = stars;

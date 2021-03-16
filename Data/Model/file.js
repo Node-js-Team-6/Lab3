@@ -1,6 +1,6 @@
 class File{
-    constructor(id, name, idUser, size){
-        this._id = id;
+    constructor(name, idUser, size){
+        this._id = undefined;
         this.name = name;
         this.extension = name.split(".")[1];
         this.idUser = idUser;

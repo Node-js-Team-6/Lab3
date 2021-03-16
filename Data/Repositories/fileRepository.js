@@ -24,8 +24,8 @@ class FileRepository {
     /*
      * deletes item from the collection; matching element happens by id
      */
-    delete(item) {
-        this.repo.delete(item, "files");
+    delete(id) {
+        this.repo.delete(id, "files");
     }
 
     /*
@@ -34,15 +34,7 @@ class FileRepository {
     find(id, callback = function(result) {}) {
         this.repo.find(id, "files", (res) => {
             const file = this.map(res);
-            this.repo.findMany('ratings', { _id: { $in: file.ratingsId} }, {}, (res) => {
-                let sum = 0;
-                for(let r of res) {
-                    sum += r.stars;
-                }
-
-                file.rating = sum / res.length;
-                callback(file);
-            })
+            callback(file);
         });
     }
 

@@ -32,8 +32,8 @@ class Repository{
     /*
      * deletes item from the collection with specified name; matching element happens by id
      */
-    delete(item, collectionName) {
-        const res = this.client.db(this.dbName).collection(collectionName).deleteOne({ _id: item._id });
+    delete(id, collectionName) {
+        const res = this.client.db(this.dbName).collection(collectionName).deleteOne({ _id: id });
 
         if(this.logger) {
             this.logger.log(`${res.deletedCount} object(s) was/were deleted.`);

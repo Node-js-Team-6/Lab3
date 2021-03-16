@@ -1,13 +1,108 @@
-const http = require('http');
-const url = require('url');
+const express = require('express');
 const { MongoClient } = require("mongodb");
-const fs = require('fs');
 
-const { Repository } = require('./Data/Repositories/repository');
-const { FileRepository } = require('./Data/Repositories/fileRepository');
 const { File } = require('./Data/Model/file');
+const { User } = require('./Data/Model/user');
+const { Rating } = require('./Data/Model/rating');
 
-function main() {
+const { FileRepository } = require('./Data/Repositories/fileRepository');
+const { UserRepository } = require('./Data/Repositories/userRepository');
+const { RatingRepository } = require('./Data/Repositories/ratingRepository');
+
+const mongoClient = new MongoClient("mongodb://localhost:27017", { useUnifiedTopology: true });
+mongoClient.connect((err, client) => {
+    if (err) {
+        return console.log(err);
+    }
+
+    try {
+        const app = express();
+        const dbName = "fileManager";
+        const logger = { log(msg) { console.log(msg) }};
+
+        app.use(express.json());
+        app.use(express.static(__dirname + "/wwwroot"));
+
+        app.get('/', function(request, response) {
+            response.redirect('files');
+        });
+
+        app.get('/home', function(request, response) {
+            response.redirect(files);
+        });
+
+        app.post('/file/delete/:id', function(request, response) {
+            const id = request.params["id"];
+            const fileRepo = new FileRepository(client, dbName, logger);
+            fileRepo.delete(id);
+            console.log(id);
+        });
+
+        app.post('/file/update', function(request, response) {
+            const fileRepo = new FileRepository(client, dbName, logger);
+
+            //TODO: how files can be updated
+
+        });
+
+        app.post('/file/create', function(request, response) {
+            const fileRepo = new FileRepository(client, dbName, logger);
+            const name = request.body.name;
+            const size = request.body.size;
+            const idUser = request.body.idUser;
+            const file = new File(name, idUser, size);
+            fileRepo.create(file);
+        });
+
+        app.get('/file/:id', function(request, response) {
+            const id = request.params["id"];
+            const filesRepo = new FileRepository(client, dbName, logger);
+            const userRepo = new UserRepository(client, dbName, logger);
+            const ratingsRepo = new RatingRepository(client, dbName, logger);
+            filesRepo.find(id, (file) => {
+                userRepo.find(file.idUser, (user) => {
+                    ratingsRepo.loadRatings(file.ratingsId, (ratings) => {
+                        var result = {
+                            file,
+                            user,
+                            ratings
+                        };
+
+                        console.log(result);
+                        response.json(result);
+                    })
+                });
+            });
+        });
+
+        app.get("/files", function (request, response) {
+            const filesRepo = new FileRepository(client, dbName, logger);
+            filesRepo.findMany({}, { name: 1}, (result) => {
+                console.log(result);
+                response.json(result);
+            })
+        });
+
+        app.listen(8080).on('close', () => client.close());
+    }
+    catch (e) {
+        console.log(e);
+        client.close;
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+/*function main() {
     const mongoClient = new MongoClient("mongodb://localhost:27017", { useUnifiedTopology: true });
     mongoClient.connect(function (err, client) {
 
@@ -55,4 +150,4 @@ function main() {
 
 }
 
-main();
+main();*/

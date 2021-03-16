@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <!-- Required meta tags -->
@@ -6,21 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
-    <script>
-    function reset() {
-    const root = new Folder(0, 'root', 0);
-    let user = new User(11, 'Misha');
-    let childFile1 = new File(2, 'meme', 'png', 0, 12, 2, user);
-    let childFile2 = new File(3, 'rant', 'txt', 0, 15, 3, user);
-    let childFile3 = new File(4, 'homework', 'mp4', 0, 42, 4, user);
-    root.addChild(childFile1);
-    root.addChild(childFile2);
-    root.addChild(childFile3);
-
-    window.localStorage.setItem('currentFolder', JSON.stringify(root));
-    bodyRender();
-    }
-    </script>
 </head>
 <body>
 <div class="container w-80">
@@ -68,7 +54,9 @@
             </div>
             <div id="container_folder"></div>
             <script>
-                reset();
+                function reset() {
+                    console.log('reset');
+                }
             </script>
 
 

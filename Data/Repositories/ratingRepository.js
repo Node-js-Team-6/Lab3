@@ -24,8 +24,8 @@ class RatingRepository {
     /*
      * deletes item from the collection; matching element happens by id
      */
-    delete(item) {
-        this.repo.delete(item, "ratings");
+    delete(id) {
+        this.repo.delete(id, "ratings");
     }
 
     /*

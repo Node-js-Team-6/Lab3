@@ -24,8 +24,8 @@ class UserRepository {
     /*
      * deletes item from the collection; matching element happens by id
      */
-    delete(item) {
-        this.repo.delete(item, "users");
+    delete(id) {
+        this.repo.delete(id, "users");
     }
 
     /*
