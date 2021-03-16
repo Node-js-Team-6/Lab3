@@ -6,6 +6,21 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.css">
+    <script>
+    function reset() {
+    const root = new Folder(0, 'root', 0);
+    let user = new User(11, 'Misha');
+    let childFile1 = new File(2, 'meme', 'png', 0, 12, 2, user);
+    let childFile2 = new File(3, 'rant', 'txt', 0, 15, 3, user);
+    let childFile3 = new File(4, 'homework', 'mp4', 0, 42, 4, user);
+    root.addChild(childFile1);
+    root.addChild(childFile2);
+    root.addChild(childFile3);
+
+    window.localStorage.setItem('currentFolder', JSON.stringify(root));
+    bodyRender();
+    }
+    </script>
 </head>
 <body>
 <div class="container w-80">
@@ -33,10 +48,38 @@
     <br>
     <br>
     <div class ='row p-1'>
-        <div class="col-md-9"></div>
+        <div class="col-md-9">
+            <div class="row p-2">
+                <div class="col-5 border border-danger rounded" style="border-width: 3px !important;">
+                    <h5 onclick="sortByName()"><a href="" style="color: #d9534f">File</a></h5>
+                </div>
+                <div class="col-2 border-top border-right border-bottom border-danger rounded text-center" style="border-width: 3px !important;">
+                    <h5 onclick="sortByAuthor()"><a href="" style="color: #d9534f">Author</a></h5>
+                </div>
+                <div class="col-2 border-top border-right border-bottom border-danger rounded text-center" style="border-width: 3px !important;">
+                    <h5 onclick="sortByRating()"><a href="" style="color: #d9534f">Rating</a></h5>
+                </div>
+                <div class="col-2 border-top border-right border-bottom border-danger rounded text-center" style="border-width: 3px !important;">
+                    <h5 style="color: #d9534f">Download</h5>
+                </div>
+                <div class="col-1 border-top border-right border-bottom border-danger rounded text-center"  style="border-width: 3px !important;">
+                    <h5 onclick="sortByDownloadCount()"><a href="" style="color: #d9534f">#</a></h5>
+                </div>
+            </div>
+            <div id="container_folder"></div>
+            <script>
+                reset();
+            </script>
+
+
+
+
+        </div>
      <!--   <div class = "col-md-3 btn-outline-warning" id = "addFileBtn" type = "button">Add File</div> -->
         <div class="col-md-3">
+            <div class="row">
             <button type="button" class="btn btn-primary btn-lg" id="addFileBtn" style="height:50px;width:240px; margin-right: auto">AddFile</button>
+        </div>
         </div>
     </div>
     <br>
@@ -83,7 +126,28 @@
     </div>
 
 
+
+    <div id="container" class="container w-75">
+        <div class='row text-center'>
+            <div class="col">
+                <div class="btn btn-danger" onclick="reset()">Reset</div>
+            </div>
+            <div class="col">
+                2
+            </div>
+            <div class="col">
+                3
+            </div>
+        </div>
+        <br/>
+        <br/>
+    </div>
 </div>
+
+
+
+<script src="script.js"></script>
+
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
