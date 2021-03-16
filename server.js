@@ -21,7 +21,7 @@ function main() {
             //repo.find(1, "files", (result) => console.log(result));
 
             const fileRepo = new FileRepository(client, "fileManager", { log(msg) { console.log(msg) } });
-            fileRepo.findMany({}, {}, (result) => console.log(result));
+            //fileRepo.findMany({}, {}, (result) => console.log(result));
 
             http.createServer(function (req, res) {
                 res.writeHead(200, { 'Content-Type': 'text/html' });
