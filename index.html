@@ -42,8 +42,8 @@
     <br>
     <br>
     <div class ='row p-1'>
-        <div class="col-md-9">
-            <div class="row p-2">
+        <div class="col-8">
+            <div class="row">
                 <div class="col-5 border border-danger rounded" style="border-width: 3px !important;">
                     <h5 onclick="sortByName()"><a href="" style="color: #d9534f">File</a></h5>
                 </div>
@@ -64,8 +64,28 @@
             <script>
                 reset();
             </script>
+        </div>
+        <div class="col-3 offset-1">
+                <div class="form-group row">
+                    <input type="name" class="form-control" id="inputFileName" placeholder="File name">
+                </div>
+                <div class="form-group row">
+                        <input type="name" class="form-control" id="inputFileExtension" placeholder="File extension">
+                </div>
+                <div class="form-group row">
+                        <input type="name" class="form-control" id="inputAuthorName" placeholder="Your name">
+                </div>
 
+                <div class="row">
+                        <button type="submit" class="btn btn-block btn-primary" id="addFileBtn" onclick = "addFile()">Add File</button>
+                </div>
 
+            <br>
+            <div class="deleteBtn">
+                <div class="row">
+                    <button type="submit" class="btn btn-block btn-primary text-center" id="delete" onclick = "deleteFile()">Delete</button>
+                </div>
+            </div>
         </div>
      <!--   <div class = "col-md-3 btn-outline-warning" id = "addFileBtn" type = "button">Add File</div> -->
         </div>
@@ -73,53 +93,11 @@
     <br>
     <br>
     <!----------ADD FORM------------->
-    <div class = 'container'>
-        <section class="addFileForm">
-    <form id="addFile">
-        <div class="form-group row">
-            <div class="col-md-9"></div>
-            <div class="col-3">
-                <input type="name" class="form-control" id="inputFileName" placeholder="File name">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-9"></div>
-            <div class="col-3">
-                <input type="name" class="form-control" id="inputFileExtension" placeholder="File extension">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-9"></div>
-            <div class="col-3">
-                <input type="name" class="form-control" id="inputAuthorName" placeholder="Your name">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-primary" id="addFileBtn" onclick = "addFile()" style="width:240px">Add File</button>
-            </div>
-        </div>
-    </form>
-        </section>
-    </div>
     <!-- Delete --------->
     <br>
     <br>
     <br>
     <br>
-
-    <div class="deleteBtn">
-        <div class="row p-2">
-        <div class="col-md-9"></div>
-        <div class="col-md-3">
-            <button type="submit" class="btn btn-primary" id="delete" onclick = "deleteFile()" style="width:240px">Delete</button>
-        </div>
-        </div>
-    </div>
-
-
 
     <div id="container" class="container w-75">
         <div class='row text-center'>
