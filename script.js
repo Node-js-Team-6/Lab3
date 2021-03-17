@@ -24,8 +24,9 @@ class File{
 
         let $radioBtn = $('<input/>', {
             type: 'radio',
-            id: this._id
-        })
+            id: this._id,
+            name = "btnSelectToDelete"
+        });
 
         let $div_icon = $('<div/>', {
             class: 'col-1'
@@ -205,6 +206,13 @@ function addFile(){
 }
 
 function deleteFile(){
+    const id = document.getElementsByName("btnSelectToDelete").find(btn => btn.checked === "checked").id;
+
+    let all = Folder.from(JSON.parse(window.localStorage.getItem('all')));
+    all = all.children.find(file => file._id !== id);
+    window.localStorage.setItem('all', JSON.stringify(all));
+    window.localStorage.setItem('currentFolder', JSON.stringify(all));
+    bodyRender();
 }
 
 function bodyRender()
