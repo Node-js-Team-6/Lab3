@@ -206,7 +206,12 @@ function addFile(){
 }
 
 function deleteFile(){
-    const id = document.getElementsByName("btnSelectToDelete").find(btn => btn.checked === "checked").id;
+    let id;
+    document.getElementsByName("btnSelectToDelete").forEach(btn => {
+        if(btn.checked) {
+            id = btn.id;
+        };
+    });
 
     let all = Folder.from(JSON.parse(window.localStorage.getItem('all')));
     all = all.children.find(file => file._id !== id);
