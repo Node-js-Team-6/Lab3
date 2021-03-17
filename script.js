@@ -16,11 +16,22 @@ class File{
             class: 'row p-1 border-bottom border-danger',
             style: 'border-width: 3px !important;'
         });
+
+        let $div_radio = $('<div/>',{
+            class: 'col-1'
+
+        });
+
+        let $radioBtn = $('<input/>', {
+            type: 'radio',
+            id: this._id
+        })
+
         let $div_icon = $('<div/>', {
             class: 'col-1'
         });
         let $div_text = $('<div/>', {
-            class: 'col-4',
+            class: 'col-3',
             html: this.name + '.' + this.extension
         });
         let $div_rating = $('<div/>', {
@@ -66,7 +77,9 @@ class File{
         });
         $div_btn.append($btn);
         $div_icon.append($img);
+        $div_radio.append($radioBtn);
 
+        $div_row.append($div_radio);
         $div_row.append($div_icon);
         $div_row.append($div_text);
         $div_row.append($div_author);
@@ -262,8 +275,8 @@ function findFileByExtension() {
 }
 
 window.onbeforeunload = function() {
-    // const root = new Folder(0, 'root', 0);
-    // let user = new User(11, 'Misha');
+    //  const root = new Folder(0, 'root', 0);
+    //  let user = new User(11, 'Misha');
     // let childFile1 = new File(2, 'meme', 'png', 0, 12, 2, user);
     // let childFile2 = new File(3, 'rant', 'txt', 0, 15, 3, user);
     // let childFile3 = new File(4, 'homework', 'mp4', 0, 42, 4, user);
