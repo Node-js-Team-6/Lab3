@@ -28,10 +28,10 @@
     <!--    Search  and back        -->
     <div class='row search text-center'>
         <div class="col-3">
-            <input type="text" class="form-control" placeholder="File name">
+            <input type="text" class="form-control" id = "fileNameSearch" placeholder="File name">
         </div>
         <div class="col-3">
-            <input type="text" class="form-control" placeholder="File extension">
+            <input type="text" class="form-control" id = "fileExtensionSearch" placeholder="File extension">
         </div>
         <div class="col-3">
             <button type="button" class="btn btn-primary" id="searchBtn" onclick="search()" style="width:240px">Search</button>
@@ -62,8 +62,6 @@
             <script>
                 reset();
             </script>
-
-
         </div>
      <!--   <div class = "col-md-3 btn-outline-warning" id = "addFileBtn" type = "button">Add File</div> -->
         </div>
@@ -116,8 +114,6 @@
         </div>
         </div>
     </div>
-
-
 
     <div id="container" class="container w-75">
         <div class='row text-center'>

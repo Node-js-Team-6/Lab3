@@ -160,10 +160,16 @@ class Rating{
 }
 
 function search(){
+    let fileName = document.getElementById('fileNameSearch').value;
+    let fileExtension = document.getElementById('fileExtensionSearch').value;
+
 
 }
 
 function addFile(){
+    let fileName = document.getElementById('inputFileName').value;
+    let fileExtension = document.getElementById('inputFileExtension').value;
+    let fileAuthorName = document.getElementById('inputAuthorName').value;
 
 }
 
