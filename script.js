@@ -182,7 +182,6 @@ function addFile(){
 }
 
 function deleteFile(){
-
 }
 
 function bodyRender()
