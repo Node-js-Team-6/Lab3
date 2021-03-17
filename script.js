@@ -25,7 +25,7 @@ class File{
         let $radioBtn = $('<input/>', {
             type: 'radio',
             id: this._id,
-            name = "btnSelectToDelete"
+            name: "btnSelectToDelete"
         });
 
         let $div_icon = $('<div/>', {
