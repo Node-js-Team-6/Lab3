@@ -7,6 +7,7 @@ class File{
         this.size = size;
         this.downloadCount = 0;
         this.ratingsId = [];
+        this.rating = 0;
     }
 
     render() {
