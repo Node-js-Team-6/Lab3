@@ -66,8 +66,8 @@ mongoClient.connect((err, client) => {
             const userRepo = new UserRepository(client, dbName, logger);
             const ratingsRepo = new RatingRepository(client, dbName, logger);
             filesRepo.find(id, (file) => {
-                userRepo.find(file.idUser, (user) => {
-                    ratingsRepo.loadRatings(file.ratingsId, (ratings) => {
+                userRepo.find(file?.idUser, (user) => {
+                    ratingsRepo.loadRatings(file?.ratingsId, (ratings) => {
                         var result = {
                             file,
                             user,
