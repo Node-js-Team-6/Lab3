@@ -56,9 +56,12 @@ class File{
         let file = this;
         $btn.on('click', function ()
         {
-            let currentFolder = Folder.from(JSON.parse(window.localStorage.getItem('currentFolder')));
-            currentFolder.children.find(f => f._id === file._id).downloadCount++;
-            window.localStorage.setItem('currentFolder', JSON.stringify(currentFolder));
+            let all = Folder.from(JSON.parse(window.localStorage.getItem('all')));
+            let current = Folder.from(JSON.parse(window.localStorage.getItem('currentFolder')));
+            all.children.find(f => f._id === file._id).downloadCount++;
+            current.children.find(f => f._id === file._id).downloadCount++;
+            window.localStorage.setItem('all', JSON.stringify(all));
+            window.localStorage.setItem('currentFolder', JSON.stringify(current));
             bodyRender();
         });
         $div_btn.append($btn);
@@ -230,18 +233,51 @@ function sortByName()
     bodyRender();
 }
 
-function findFileByName(q = "") {
+function findFileByName() {
     const folder = Folder.from(JSON.parse(window.localStorage.getItem('all')));
-    let res = folder.children.filter(file => file.name.includes(q));
-    window.localStorage.setItem('currentFolder', JSON.stringify(res));
+    let q = document.getElementById("fileNameSearch").value;
+    if (q === "" || q === null) {
+        window.localStorage.setItem('currentFolder', JSON.stringify(folder));
+        bodyRender();
+        return;
+    }
+    let res = folder.children.filter(file => file.name.startsWith(q));
+    folder.children = res;
+    window.localStorage.setItem('currentFolder', JSON.stringify(folder));
+    bodyRender();
+}
+
+function findFileByExtension() {
+    const folder = Folder.from(JSON.parse(window.localStorage.getItem('all')));
+    let q = document.getElementById("fileExtensionSearch").value;
+    if (q === "" || q === null) {
+        window.localStorage.setItem('currentFolder', JSON.stringify(folder));
+        bodyRender();
+        return;
+    }
+    let res = folder.children.filter(file => file.extension.startsWith(q));
+    folder.children = res;
+    window.localStorage.setItem('currentFolder', JSON.stringify(folder));
     bodyRender();
 }
 
 window.onbeforeunload = function() {
-    document.cookie = window.localStorage.getItem('all');
+    // const root = new Folder(0, 'root', 0);
+    // let user = new User(11, 'Misha');
+    // let childFile1 = new File(2, 'meme', 'png', 0, 12, 2, user);
+    // let childFile2 = new File(3, 'rant', 'txt', 0, 15, 3, user);
+    // let childFile3 = new File(4, 'homework', 'mp4', 0, 42, 4, user);
+    // let childFile4 = new File(5, 'smth', 'kek', 0, 43, 5, user);
+    // root.addChild(childFile1);
+    // root.addChild(childFile2);
+    // root.addChild(childFile3);
+    // root.addChild(childFile4);
+    //
+    // window.localStorage.setItem('all', JSON.stringify(root));
+    // bodyRender();
 }
 
 window.onload = function() {
-    window.localStorage.setItem('all', document.cookie);
-    window.localStorage.setItem('currentFolder', document.cookie);
+    window.localStorage.setItem('currentFolder', window.localStorage.getItem('all'));
+   bodyRender();
 }
