@@ -210,12 +210,12 @@ function deleteFile(){
     document.getElementsByName("btnSelectToDelete").forEach(btn => {
         if(btn.checked) {
             id = btn.id;
-            break;
         };
     });
 
     let all = Folder.from(JSON.parse(window.localStorage.getItem('all')));
-    all = all.children.find(file => file._id !== id);
+    let cc = all.children.filter(file => file._id.toString() !== id);
+    all.children = cc;
     window.localStorage.setItem('all', JSON.stringify(all));
     window.localStorage.setItem('currentFolder', JSON.stringify(all));
     bodyRender();
@@ -310,6 +310,7 @@ window.onbeforeunload = function() {
     // root.addChild(childFile4);
     //
     // window.localStorage.setItem('all', JSON.stringify(root));
+    // window.localStorage.setItem('currentFolder',  JSON.stringify(root));
     // bodyRender();
 }
 
