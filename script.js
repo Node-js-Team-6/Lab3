@@ -207,15 +207,16 @@ function addFile(){
 
 function deleteFile(){
     let id;
-    document.getElementsByName("btnSelectToDelete").forEach(btn => {
+    const btns = document.getElementsByName("btnSelectToDelete");
+
+    for(const btn of btns) {
         if(btn.checked) {
             id = btn.id;
-            break;
         };
-    });
+    }
 
     let all = Folder.from(JSON.parse(window.localStorage.getItem('all')));
-    all = all.children.find(file => file._id !== id);
+    all = all.children.find(file => file._id != id);
     window.localStorage.setItem('all', JSON.stringify(all));
     window.localStorage.setItem('currentFolder', JSON.stringify(all));
     bodyRender();
