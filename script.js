@@ -218,3 +218,19 @@ function sortByName()
     window.localStorage.setItem('currentFolder', JSON.stringify(currentFolder));
     bodyRender();
 }
+
+function findFileByName(q = "") {
+    const folder = Folder.from(JSON.parse(window.localStorage.getItem('all')));
+    let res = folder.children.filter(file => file.name.includes(q));
+    window.localStorage.setItem('currentFolder', JSON.stringify(res));
+    bodyRender();
+}
+
+window.onbeforeunload = function() {
+    document.cookie = window.localStorage.getItem('all');
+}
+
+window.onload = function() {
+    window.localStorage.setItem('all', document.cookie);
+    window.localStorage.setItem('currentFolder', document.cookie);
+}
