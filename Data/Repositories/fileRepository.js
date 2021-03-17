@@ -34,7 +34,15 @@ class FileRepository {
     find(id, callback = function(result) {}) {
         this.repo.find(id, "files", (res) => {
             const file = this.map(res);
-            callback(file);
+            this.repo.findMany('ratings', { _id: { $in: file.ratingsId} }, {}, (res) => {
+                let sum = 0;
+                for(let r of res) {
+                    sum += r.stars;
+                }
+
+                file.rating = sum / res.length;
+                callback(file);
+            })
         });
     }
 
@@ -56,8 +64,8 @@ class FileRepository {
         this.repo.findMany("files", filterObject, sortObject, (res) => {
             let files = new Array();
 
-            for (let r of res) {
-                files.push(this.map(r));
+            for (let file of res) {              
+                files.push(this.map(file));
             }
 
             callback(files);
