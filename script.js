@@ -9,6 +9,8 @@ class File{
         this.rating = rating;
     }
 
+
+
     render() {
         let $div_row = $('<div/>', {
             class: 'row p-1 border-bottom border-danger',
@@ -155,6 +157,18 @@ class Rating{
         this.idUser = idUser;
         this.idFile = idFile;
     }
+}
+
+function search(){
+
+}
+
+function addFile(){
+
+}
+
+function deleteFile(){
+
 }
 
 function bodyRender()
