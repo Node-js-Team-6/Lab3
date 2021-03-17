@@ -13,9 +13,11 @@
     let childFile1 = new File(2, 'meme', 'png', 0, 12, 2, user);
     let childFile2 = new File(3, 'rant', 'txt', 0, 15, 3, user);
     let childFile3 = new File(4, 'homework', 'mp4', 0, 42, 4, user);
+    let childFile4 = new File(5, 'smth', 'kek', 0, 43, 5, user);
     root.addChild(childFile1);
     root.addChild(childFile2);
     root.addChild(childFile3);
+    root.addChild(childFile4);
 
     window.localStorage.setItem('currentFolder', JSON.stringify(root));
     bodyRender();
@@ -26,13 +28,13 @@
 <body>
 <div class="container w-80">
 
-    <!--    Search  and back        -->
+    <!--    Search        -->
     <div class='row search text-center'>
         <div class="col-3">
-            <input type="text" class="form-control" placeholder="File name">
+            <input type="text" class="form-control" id="fileNameSearch" placeholder="File name">
         </div>
         <div class="col-3">
-            <input type="text" class="form-control" placeholder="File extension">
+            <input type="text" class="form-control" id="fileExtensionSearch" placeholder="File extension">
         </div>
         <div class="col-3">
             <button type="button" class="btn btn-primary" id="searchBtn" onclick="search()" style="width:240px">Search</button>
@@ -41,8 +43,8 @@
     <br>
     <br>
     <div class ='row p-1'>
-        <div class="col-md-9">
-            <div class="row p-2">
+        <div class="col-8">
+            <div class="row">
                 <div class="col-5 border border-danger rounded" style="border-width: 3px !important;">
                     <h5 onclick="sortByName()"><a href="" style="color: #d9534f">File</a></h5>
                 </div>
@@ -63,8 +65,28 @@
             <script>
                 reset();
             </script>
+        </div>
+        <div class="col-3 offset-1">
+                <div class="form-group row">
+                    <input type="name" class="form-control" id="inputFileName" placeholder="File name">
+                </div>
+                <div class="form-group row">
+                        <input type="name" class="form-control" id="inputFileExtension" placeholder="File extension">
+                </div>
+                <div class="form-group row">
+                        <input type="name" class="form-control" id="inputAuthorName" placeholder="Your name">
+                </div>
 
+                <div class="row">
+                        <button type="submit" class="btn btn-block btn-primary" id="addFileBtn" onclick = "addFile()">Add File</button>
+                </div>
 
+            <br>
+            <div class="deleteBtn">
+                <div class="row">
+                    <button type="submit" class="btn btn-block btn-primary text-center" id="delete" onclick = "deleteFile()">Delete</button>
+                </div>
+            </div>
         </div>
      <!--   <div class = "col-md-3 btn-outline-warning" id = "addFileBtn" type = "button">Add File</div> -->
         </div>
@@ -72,53 +94,11 @@
     <br>
     <br>
     <!----------ADD FORM------------->
-    <div class = 'container'>
-        <section class="addFileForm">
-    <form id="addFile">
-        <div class="form-group row">
-            <div class="col-md-9"></div>
-            <div class="col-3">
-                <input type="name" class="form-control" id="inputFileName" placeholder="File name">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-9"></div>
-            <div class="col-3">
-                <input type="name" class="form-control" id="inputFileExtension" placeholder="File extension">
-            </div>
-        </div>
-        <div class="form-group row">
-            <div class="col-md-9"></div>
-            <div class="col-3">
-                <input type="name" class="form-control" id="inputAuthorName" placeholder="Your name">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-9"></div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-primary" id="addFileBtn" onclick = "addFile()" style="width:240px">Add File</button>
-            </div>
-        </div>
-    </form>
-        </section>
-    </div>
     <!-- Delete --------->
     <br>
     <br>
     <br>
     <br>
-
-    <div class="deleteBtn">
-        <div class="row p-2">
-        <div class="col-md-9"></div>
-        <div class="col-md-3">
-            <button type="submit" class="btn btn-primary" id="delete" onclick = "deleteFile()" style="width:240px">Delete</button>
-        </div>
-        </div>
-    </div>
-
-
 
     <div id="container" class="container w-75">
         <div class='row text-center'>
