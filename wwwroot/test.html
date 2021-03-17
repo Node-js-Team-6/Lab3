@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+</head>
+<body>
+    <form name="createFile">
+        <label>Name: </label>
+        <input type="text" name="name"/><br/>
+        <label>Size: </label>
+        <input type="text" name="size"/><br/>
+        <label>User id: </label>
+        <input type="text" name="userId"/> <br/>
+        <button type="submit" id="submit">Create</button>
+    </form>
+
+    <script>
+        document.getElementById('submit').addEventListener('click', function (e) {
+            e.preventDefault();
+            const form = document.forms["createfile"];
+            let nameInput = form.elements["name"];
+            let sizeInput = form.elements["size"];
+            let userInput = form.elements["userId"];
+
+            let data = JSON.stringify({ name: nameInput.value, size: sizeInput.value, userId: userInput.value });
+
+            let request = new XMLHttpRequest();
+            request.open('POST', '/file/create', true);
+            request.setRequestHeader("Content-Type", "application/json");
+            /*request.addEventListener("load", function () {
+                 let receivedUser = JSON.parse(request.response);
+                 console.log(receivedUser.userName, "-", receivedUser.userAge);  
+             });*/
+             
+             request.send(user);
+        });
+    </script>
+</body>
+</html>

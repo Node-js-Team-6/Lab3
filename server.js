@@ -40,9 +40,15 @@ mongoClient.connect((err, client) => {
 
         app.post('/file/update', function(request, response) {
             const fileRepo = new FileRepository(client, dbName, logger);
-
-            //TODO: how files can be updated
-
+            const name = request.body.name;
+            const size = request.body.size;
+            const idUser = request.body.idUser;
+            const file = new File(name, idUser, size);
+            file.ratingsId = request.body.ratingsId;
+            file._id = request.body.id;
+            file.rating =  request.body.rating;
+            file.downloadCount = request.body.downloadCount;
+            fileRepo.create(file);
         });
 
         app.post('/file/create', function(request, response) {
@@ -78,7 +84,6 @@ mongoClient.connect((err, client) => {
         app.get("/files", function (request, response) {
             const filesRepo = new FileRepository(client, dbName, logger);
             filesRepo.findMany({}, { name: 1}, (result) => {
-                console.log(result);
                 response.json(result);
             })
         });
