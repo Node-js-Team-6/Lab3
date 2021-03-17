@@ -210,6 +210,7 @@ function deleteFile(){
     document.getElementsByName("btnSelectToDelete").forEach(btn => {
         if(btn.checked) {
             id = btn.id;
+            break;
         };
     });
 
