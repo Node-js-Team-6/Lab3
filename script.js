@@ -192,6 +192,16 @@ function addFile(){
     let fileExtension = document.getElementById('inputFileExtension').value;
     let fileAuthorName = document.getElementById('inputAuthorName').value;
 
+    if (fileName === "" || fileExtension === "" || fileAuthorName === "")
+        return;
+
+    let usr = new User(-1, fileAuthorName);
+    let ff = new File(Math.round(Math.random()*10000), fileName, fileExtension, 20, 0, 0, usr );
+    let all = Folder.from(JSON.parse(window.localStorage.getItem('all')));
+    all.addChild(ff);
+    window.localStorage.setItem('all', JSON.stringify(all));
+    window.localStorage.setItem('currentFolder', JSON.stringify(all));
+    bodyRender();
 }
 
 function deleteFile(){
@@ -291,6 +301,5 @@ window.onbeforeunload = function() {
 }
 
 window.onload = function() {
-    window.localStorage.setItem('currentFolder', window.localStorage.getItem('all'));
    bodyRender();
 }
