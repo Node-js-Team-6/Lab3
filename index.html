@@ -13,9 +13,11 @@
     let childFile1 = new File(2, 'meme', 'png', 0, 12, 2, user);
     let childFile2 = new File(3, 'rant', 'txt', 0, 15, 3, user);
     let childFile3 = new File(4, 'homework', 'mp4', 0, 42, 4, user);
+    let childFile4 = new File(5, 'smth', 'kek', 0, 43, 5, user);
     root.addChild(childFile1);
     root.addChild(childFile2);
     root.addChild(childFile3);
+    root.addChild(childFile4);
 
     window.localStorage.setItem('currentFolder', JSON.stringify(root));
     bodyRender();
@@ -70,10 +72,6 @@
             <script>
                 reset();
             </script>
-
-
-
-
         </div>
      <!--   <div class = "col-md-3 btn-outline-warning" id = "addFileBtn" type = "button">Add File</div> -->
         <div class="col-md-3">
@@ -100,7 +98,6 @@
                 <input type="name" class="form-control" id="inputFileExtension" placeholder="File extension">
             </div>
         </div>
-
         <div class="row">
             <div class="col-md-9"></div>
             <div class="col-md-3">

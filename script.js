@@ -29,8 +29,13 @@ class File{
             class: 'col-2 text-center',
             html: this.user.name
         });
+        let img_path;
+        if (['png', 'txt', 'mp4'].includes(this.extension))
+            img_path = this.extension;
+        else
+            img_path = 'undefined'
         let $img = $('<img/>', {
-            src: 'Resources/'+this.extension+'.ico',
+            src: 'Resources/'+img_path+'.ico',
             width: 20,
             height: 20,
         });
